@@ -30,9 +30,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-10 pb-32">
       <div className="card bg-base-300 w-96 shadow-xl">
-        <div className="card-body">
+        <div className="card-body h-96">
           <h2 className="card-title justify-center">Login</h2>
           <div>
             <label className="form-control w-full max-w-xs my-2">
