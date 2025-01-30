@@ -20,14 +20,14 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-neutral">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link to="/" className="btn btn-ghost text-xl text-white">
           👩‍💻 SparkUp
         </Link>
       </div>
       {user && (
-        <div className="flex-none gap-2">
+        <div className="flex-none gap-2  text-white">
           <div className="form-control">Welcome, {user.firstName}</div>
           <div className="dropdown dropdown-end mx-5 flex">
             <div
@@ -41,7 +41,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <Link to="/profile" className="justify-between">
