@@ -15,7 +15,6 @@ const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
-
   const saveProfile = async () => {
     setError("");
     try {
@@ -30,6 +29,27 @@ const EditProfile = ({ user }) => {
     } catch (err) {
       setError(err.response.data);
     }
+  };
+
+  // Handle file change and create image preview
+  const handleFileChange =  async(event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setPhotoUrl(URL.createObjectURL(file)); // Set the photo URL for the preview
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "mithlesh_sharma");
+      data.append("cloud_name", "dejxspajc");
+      const resImage = await axios.post("https://api.cloudinary.com/v1_1/dejxspajc/image/upload", data);
+      const photoUrl = resImage?.data?.url;
+      setPhotoUrl(photoUrl);
+
+    }
+  };
+
+  // Open the file input when the button is clicked
+  const openFileInput = () => {
+    document.getElementById("fileInput").click();
   };
 
   return (
@@ -57,13 +77,26 @@ const EditProfile = ({ user }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Photo URL</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Photo</label>
+            {/* Upload Photo Button */}
+            <button
+              onClick={openFileInput}
+              className="bg-indigo-600 text-white py-2 px-4 rounded-md"
+            >
+              Upload Photo
+            </button>
+
+            {/* Hidden File Input */}
             <input
-              type="text"
-              value={photoUrl}
-              onChange={(e) => setPhotoUrl(e.target.value)}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: "none" }} // Hide the input element
             />
+
+            {/* Display the preview of the selected image */}
+        
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
