@@ -1,70 +1,103 @@
 import axios from "axios";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { emptyFeed } from "../utils/feedSlice";
+import { FiUsers } from "react-icons/fi";
+import { IoMdLogOut } from "react-icons/io";
+import { MdKeyboardArrowDown } from "react-icons/md"; // Arrow icon for dropdown
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
+  // Handle Logout
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
-      dispatch(emptyFeed())
+      dispatch(emptyFeed());
       return navigate("/login");
     } catch (err) {
-      // Error logic maybe redirect to error page
+      console.error("Logout failed:", err);
     }
   };
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="navbar bg-neutral">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl text-white">
-          👩‍💻 SparkUp
-        </Link>
-      </div>
+    <div className="bg-[#111827] shadow-md py-3 px-6 flex items-center justify-between text-white">
+      {/* Logo */}
+      <Link to= {user ? "/" : "/login"} className="text-2xl font-semibold text-blue-400 hover:text-blue-300">
+        👩‍💻 SparkUp
+      </Link>
+
       {user && (
-        <div className="flex-none gap-2  text-white">
-          <div className="form-control">Welcome, {user.firstName}</div>
-          <div className="dropdown dropdown-end mx-5 flex">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+        <div className="flex items-center space-x-6">
+          {/* Connections Icon */}
+          <Link to="/connections" className="flex items-center text-gray-300 hover:text-blue-300 transition">
+            <FiUsers size={22} />
+            <span className="ml-2 hidden sm:inline">Connections</span>
+          </Link>
+
+          {/* Profile Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className="flex items-center space-x-2 hover:bg-gray-800 px-3 py-2 rounded-lg transition"
+              onClick={() => setDropdownOpen(!isDropdownOpen)}
             >
-              <div className="w-10 rounded-full">
-                <img alt="user photo" src={user.photoUrl} />
+              <img src={user.photoUrl} alt="User Avatar" className="w-10 h-10 rounded-full border border-gray-600 object-cover" />
+              <span className="hidden sm:inline">{user.firstName}</span>
+              <MdKeyboardArrowDown size={20} />
+            </button>
+
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-3 w-48 bg-[#1f2937] shadow-lg rounded-md py-2">
+                <ul className="text-sm text-gray-300">
+                  <li>
+                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-700 rounded-t-md">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/requests" className="block px-4 py-2 hover:bg-gray-700">
+                      Requests
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center w-full px-4 py-2 hover:bg-red-600 text-red-400 hover:text-white transition rounded-b-md"
+                    >
+                      <IoMdLogOut size={18} className="mr-2" />
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <Link to="/profile" className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </Link>
-              </li>
-              <li>
-              <Link to="/connections">Connections</Link>
-              </li>
-              <li>
-                <Link to="/requests">Requests</Link>
-              </li>
-              <li>
-                <a onClick={handleLogout}>Logout</a>
-              </li>
-            </ul>
+            )}
           </div>
         </div>
       )}
     </div>
   );
 };
+
 export default NavBar;

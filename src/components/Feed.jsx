@@ -25,14 +25,27 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (!feed) return;
+  if (!feed) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
+        
+      </div>
+    )
+  }
   
   if (feed.length <= 0)
-    return <h1 className="flex justify-center my-10">No new users founds!</h1>;
+  {
+    return (
+      <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
+        No new users found
+      </div>
+    );
+  }
+   
 
   return (
     feed && (
-      <div className="flex justify-center items-center  py-5 bg-[#f0f2f4] h-screen">
+      <div className="flex justify-center items-center  py-5 bg-neutral h-screen">
         <UserCard user={feed[0]} />
       </div>
     )

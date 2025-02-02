@@ -22,7 +22,7 @@ const Connections = () => {
   if (!connections) return;
   if (connections.length === 0) return <h1> No Connections Found</h1>;
   return (
-    <div className="text-center h-screen bg-[#f0f2f4] py-10">
+    <div className="text-center h-screen bg-neutral py-10">
       <h1 className="text-bold text-white text-3xl">Connections</h1>
       {connections.map((connection) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =

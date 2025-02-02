@@ -39,7 +39,7 @@ const Requests = () => {
     return <h1 className="flex justify-center my-10"> No Requests Found</h1>;
 
   return (
-    <div className="text-center my-10">
+    <div className="text-center py-10 bg-neutral h-screen">
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
 
       {requests.map((request) => {

@@ -53,7 +53,7 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-start bg-[#f0f2f4] p-6 gap-6 min-h-screen">
+    <div className="flex flex-col md:flex-row justify-center items-start bg-neutral p-6 gap-6 min-h-screen">
       {/* Edit Profile Card */}
       <div className="w-full md:w-96 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">Edit Profile</h2>
