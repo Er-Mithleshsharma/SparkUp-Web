@@ -8,7 +8,6 @@ import { emptyFeed } from "../utils/feedSlice";
 import { FiUsers } from "react-icons/fi";
 import { IoMdLogOut } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md"; // Arrow icon for dropdown
-
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -43,9 +42,11 @@ const NavBar = () => {
 
   return (
     <div className="bg-[#111827] shadow-md py-3 px-6 flex items-center justify-between text-white">
+
+     
       {/* Logo */}
-      <Link to= {user ? "/" : "/login"} className="text-2xl font-semibold text-blue-400 hover:text-blue-300">
-        👩‍💻 SparkUp
+      <Link to= {user ? "/" : "/login"} className="text-2xl font-semibold text-blue-400 hover:text-blue-300 flex gap-1 items-center">
+         <img className="h-12" src="public\logo_noBg.png" alt="" /> <p>SparkUp</p>
       </Link>
 
       {user && (

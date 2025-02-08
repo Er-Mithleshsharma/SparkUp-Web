@@ -28,7 +28,7 @@ const Feed = () => {
   if (!feed) {
     return (
       <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
-        
+        No Feed Available Sorry for the Inconvenience
       </div>
     )
   }
