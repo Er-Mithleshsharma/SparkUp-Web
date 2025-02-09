@@ -42,17 +42,21 @@ const NavBar = () => {
 
   return (
     <div className="bg-[#111827] shadow-md py-3 px-6 flex items-center justify-between text-white">
-
-     
       {/* Logo */}
-      <Link to= {user ? "/" : "/login"} className="text-2xl font-semibold text-blue-400 hover:text-blue-300 flex gap-1 items-center">
-         <img className="h-12" src="public\logo_noBg.png" alt="" /> <p>SparkUp</p>
+      <Link
+        to={user ? "/" : "/login"}
+        className="text-2xl font-semibold text-blue-400 hover:text-blue-300 flex gap-1 items-center"
+      >
+        <img className="h-12" src="\logo_noBg.png" alt="" /> <p>SparkUp</p>
       </Link>
 
       {user && (
         <div className="flex items-center space-x-6">
           {/* Connections Icon */}
-          <Link to="/connections" className="flex items-center text-gray-300 hover:text-blue-300 transition">
+          <Link
+            to="/connections"
+            className="flex items-center text-gray-300 hover:text-blue-300 transition"
+          >
             <FiUsers size={22} />
             <span className="ml-2 hidden sm:inline">Connections</span>
           </Link>
@@ -63,7 +67,11 @@ const NavBar = () => {
               className="flex items-center space-x-2 hover:bg-gray-800 px-3 py-2 rounded-lg transition"
               onClick={() => setDropdownOpen(!isDropdownOpen)}
             >
-              <img src={user.photoUrl} alt="User Avatar" className="w-10 h-10 rounded-full border border-gray-600 object-cover" />
+              <img
+                src={user.photoUrl}
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full border border-gray-600 object-cover"
+              />
               <span className="hidden sm:inline">{user.firstName}</span>
               <MdKeyboardArrowDown size={20} />
             </button>
@@ -73,13 +81,27 @@ const NavBar = () => {
               <div className="absolute right-0 mt-3 w-48 bg-[#1f2937] shadow-lg rounded-md py-2">
                 <ul className="text-sm text-gray-300">
                   <li>
-                    <Link to="/profile" className="block px-4 py-2 hover:bg-gray-700 rounded-t-md">
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-gray-700 rounded-t-md"
+                    >
                       Profile
                     </Link>
                   </li>
                   <li>
-                    <Link to="/requests" className="block px-4 py-2 hover:bg-gray-700">
+                    <Link
+                      to="/requests"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
                       Requests
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/premium"
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      Premium
                     </Link>
                   </li>
                   <li>

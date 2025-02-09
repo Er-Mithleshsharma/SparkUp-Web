@@ -28,7 +28,7 @@ const Feed = () => {
   if (!feed) {
     return (
       <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
-        No Feed Available Sorry for the Inconvenience
+      
       </div>
     )
   }
@@ -45,7 +45,7 @@ const Feed = () => {
 
   return (
     feed && (
-      <div className="flex justify-center items-center  py-5 bg-neutral h-screen">
+      <div className="flex justify-center items-center  bg-neutral min-h-[90vh]">
         <UserCard user={feed[0]} />
       </div>
     )
