@@ -62,7 +62,7 @@ const NavBar = () => {
           </Link>
 
           {/* Profile Dropdown */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative z-[9999]" ref={dropdownRef}>
             <button
               className="flex items-center space-x-2 hover:bg-gray-800 px-3 py-2 rounded-lg transition"
               onClick={() => setDropdownOpen(!isDropdownOpen)}
