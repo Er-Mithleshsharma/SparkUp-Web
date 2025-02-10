@@ -6,13 +6,17 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
+    if (location.pathname === "/tnc" || location.pathname === "/privacypolicy" || location.pathname === "/refunds" || location.pathname === "/contact") {
+         return;
+    }
     if (userData) return;
     try {
       const res = await axios.get(BASE_URL + "/profile/view", {
