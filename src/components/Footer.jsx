@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-[#111827] text-white p-4 flex flex-col md:flex-row items-center justify-between">
@@ -17,10 +19,10 @@ const Footer = () => {
       </aside>
        <div className="flex items-center space-x-2">
       <nav className="flex space-x-4 mt-4 md:mt-0">
-        <a href="/tnc" className="hover:text-gray-300">Terms & Conditions</a>
-        <a href="/privacypolicy" className="hover:text-gray-300">Privacy Policy</a>
-        <a href="/refunds" className="hover:text-gray-300">Refunds</a>
-        <a href="/contact" className="hover:text-gray-300">Contact Us</a>
+        <Link to ="/tnc" className="hover:text-gray-300">Terms & Conditions</Link>
+        <Link to="/privacypolicy" className="hover:text-gray-300">Privacy Policy</Link>
+        <Link to="/refunds" className="hover:text-gray-300">Refunds</Link>
+        <Link to="/contact" className="hover:text-gray-300">Contact Us</Link>
       </nav>
       
       <nav className="flex space-x-4 mt-4 md:mt-0 pl-4">
