@@ -4,84 +4,114 @@ import { useEffect, useState } from "react";
 
 const Premium = () => {
   const [isUserPremium, setIsUserPremium] = useState(false);
+
   useEffect(() => {
     verifyPremiumUser();
   }, []);
 
   const verifyPremiumUser = async () => {
-    const res = await axios.get(BASE_URL + "/premium/verify", {
-      withCredentials: true,
-    });
- console.log(res);
-    if (res.data.isPremium) {
-      setIsUserPremium(true);
+    try {
+      const res = await axios.get(BASE_URL + "/premium/verify", {
+        withCredentials: true,
+      });
+
+      if (res.data.isPremium) {
+        setIsUserPremium(true);
+      }
+    } catch (error) {
+      console.error("Error verifying premium status:", error);
     }
   };
 
   const handleBuyClick = async (type) => {
-    const order = await axios.post(
-      BASE_URL + "/payment/create",
-      {
-        membershipType: type,
-      },
-      { withCredentials: true }
-    );
+    try {
+      const order = await axios.post(
+        BASE_URL + "/payment/create",
+        { membershipType: type },
+        { withCredentials: true }
+      );
 
-    const { amount, keyId, currency, notes, orderId } = order.data;
+      const { amount, keyId, currency, notes, orderId } = order.data;
 
-    const options = {
-      key: keyId,
-      amount,
-      currency,
-      name: "SparkUp",
-      description: "Connect to other developers",
-      order_id: orderId,
-      prefill: {
-        name: notes.firstName + " " + notes.lastName,
-        email: notes.emailId,
-        contact: "9999999999",
-      },
-      theme: {
-        color: "#F37254",
-      },
-      handler: verifyPremiumUser,
-    };
+      const options = {
+        key: keyId,
+        amount,
+        currency,
+        name: "SparkUp",
+        description: "Connect to other developers",
+        order_id: orderId,
+        prefill: {
+          name: notes.firstName + " " + notes.lastName,
+          email: notes.emailId,
+          contact: "9999999999",
+        },
+        theme: { color: "#F37254" },
+        handler: verifyPremiumUser,
+      };
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Payment error:", error);
+    }
   };
-  return isUserPremium ? (
-    "You're are already a premium user"
-  ) : (
-    <div className="m-10">
-      <div className="flex w-full">
-        <div className="card bg-base-300 rounded-box grid h-80 flex-grow place-items-center">
-          <h1 className="font-bold text-3xl">Silver Membership</h1>
-          <ul>
-            <li> - Chat with other people</li>
-            <li> - 100 connection Requests per day</li>
-            <li> - Blue Tick</li>
-            <li> - 3 months</li>
+
+  if (isUserPremium) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg text-center">
+        <h1 className="text-3xl font-bold text-gray-800">🎉 You are already a Premium Member!</h1>
+        <p className="text-gray-600 mt-4 text-lg">
+          Enjoy all the exclusive features and perks that come with your premium membership.
+        </p>
+      </div>
+    </div>
+    );
+  }
+
+  return ( 
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 flex flex-col items-center justify-center px-6 py-12">
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">
+        Upgrade to Premium
+      </h1>
+      <p className="text-lg text-gray-600 mb-10 text-center max-w-2xl">
+        Unlock exclusive features and connect with developers like never before.
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl">
+        {/* Silver Membership */}
+        <div className="bg-white bg-opacity-70 backdrop-blur-md shadow-xl rounded-xl p-8 border border-gray-200 hover:scale-105 transition-transform duration-300">
+          <h2 className="text-3xl font-bold text-gray-800 text-center">
+            Silver Membership
+          </h2>
+          <ul className="mt-4 text-gray-600 space-y-2 text-lg">
+            <li>✅ Chat with other people</li>
+            <li>✅ 100 Connection Requests per day</li>
+            <li>✅ Blue Tick</li>
+            <li>✅ Valid for 3 months</li>
           </ul>
           <button
             onClick={() => handleBuyClick("silver")}
-            className="btn btn-secondary"
+            className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg transition-all duration-300"
           >
             Buy Silver
           </button>
         </div>
-        <div className="divider divider-horizontal">OR</div>
-        <div className="card bg-base-300 rounded-box grid h-80 flex-grow place-items-center">
-          <h1 className="font-bold text-3xl">Gold Membership</h1>
-          <ul>
-            <li> - Chat with other people</li>
-            <li> - Inifiniye connection Requests per day</li>
-            <li> - Blue Tick</li>
-            <li> - 6 months</li>
+
+        {/* Gold Membership */}
+        <div className="bg-white bg-opacity-70 backdrop-blur-md shadow-xl rounded-xl p-8 border border-gray-200 hover:scale-105 transition-transform duration-300">
+          <h2 className="text-3xl font-bold text-gray-800 text-center">
+            Gold Membership
+          </h2>
+          <ul className="mt-4 text-gray-600 space-y-2 text-lg">
+            <li>✅ Chat with other people</li>
+            <li>✅ Unlimited Connection Requests per day</li>
+            <li>✅ Blue Tick</li>
+            <li>✅ Valid for 6 months</li>
           </ul>
           <button
             onClick={() => handleBuyClick("gold")}
-            className="btn btn-primary"
+            className="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg shadow-lg transition-all duration-300"
           >
             Buy Gold
           </button>
@@ -90,4 +120,5 @@ const Premium = () => {
     </div>
   );
 };
+
 export default Premium;

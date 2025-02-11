@@ -36,11 +36,87 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests) return null;
+  if (!requests) {
+    return (
+      <div className="py-10 bg-gradient-to-r from-blue-50 to-purple-50 ">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Connection Requests
+        </h1>
+        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
+          {/* Left Section: Photo, Name, and Details */}
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
+            <div>
+              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
+              <div className="h-4 w-24 bg-gray-200 rounded"></div>
+              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
+            </div>
+          </div>
+
+          {/* Right Section: Buttons */}
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
+          {/* Left Section: Photo, Name, and Details */}
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
+            <div>
+              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
+              <div className="h-4 w-24 bg-gray-200 rounded"></div>
+              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
+            </div>
+          </div>
+
+          {/* Right Section: Buttons */}
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
+          {/* Left Section: Photo, Name, and Details */}
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
+            <div>
+              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
+              <div className="h-4 w-24 bg-gray-200 rounded"></div>
+              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
+            </div>
+          </div>
+
+          {/* Right Section: Buttons */}
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
+          {/* Left Section: Photo, Name, and Details */}
+          <div className="flex items-center space-x-4">
+            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
+            <div>
+              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
+              <div className="h-4 w-24 bg-gray-200 rounded"></div>
+              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
+            </div>
+          </div>
+
+          {/* Right Section: Buttons */}
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
+            <div className="h-10 w-20 bg-gray-300 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (requests.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] bg-gray-50 p-6">
+      <div className="flex flex-col items-center justify-center min-h-[50vh] bg-gradient-to-r from-blue-50 to-purple-50 p-6">
         <div className="text-center">
           {/* Icon */}
           <svg
