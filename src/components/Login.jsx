@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
@@ -16,7 +16,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+   
   const handleLogin = async () => {
     try {
       const res = await axios.post(
