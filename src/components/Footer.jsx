@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#111827] text-white p-4">
+    <footer className="bg-black  text-white p-4">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
         {/* Copyright Section */}
         <aside className="flex items-center space-x-2">

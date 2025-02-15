@@ -27,89 +27,55 @@ const Connections = () => {
 
   if (!connections) {
     return (
-      <div className="py-10 bg-gradient-to-r from-blue-50 to-purple-50 ">
-    <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-        Connections
-      </h1>
-      <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-        
-      {/* Left Section: Photo, Name, and Details */}
-      <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-        <div>
-          <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-          <div className="h-4 w-24 bg-gray-200 rounded"></div>
-          <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-        </div>
-      </div>
-
-      {/* Right Section: Buttons */}
-      <div className="flex space-x-4 mt-4 md:mt-0">
-        <div className="h-10 w-20 bg-gray-300 rounded"></div>
-
-      </div>
-    </div>
-    <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-        
-        {/* Left Section: Photo, Name, and Details */}
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-          <div>
-            <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-            <div className="h-4 w-24 bg-gray-200 rounded"></div>
-            <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
+      <div className="min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 relative py-10 overflow-hidden">
+        {/* Background Blobs */}
+        <div
+          className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+          style={{
+            clipPath:
+              "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+          }}
+        ></div>
+  
+        {/* Content */}
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+            Connections
+          </h1>
+          <div className="space-y-4 px-4 max-w-4xl mx-auto">
+            {/* Shimmer Cards */}
+            {[1, 2, 3, 4].map((_, index) => (
+              <div
+                key={index}
+                className="bg-gray-800/90 backdrop-blur-lg rounded-xl p-6 flex flex-col md:flex-row items-center justify-between border border-gray-700/50 shadow-sm animate-pulse"
+              >
+                {/* Left Section: Photo, Name, and Details */}
+                <div className="flex items-center space-x-4">
+                  {/* Profile Image Shimmer */}
+                  <div className="w-16 h-16 rounded-full bg-gray-700/50 border-2 border-gray-700/50"></div>
+                  {/* Name and Details Shimmer */}
+                  <div className="space-y-2">
+                    <div className="h-5 w-32 bg-gray-700/50 rounded"></div>
+                    <div className="h-4 w-24 bg-gray-700/50 rounded"></div>
+                    <div className="h-3 w-40 bg-gray-700/50 rounded"></div>
+                  </div>
+                </div>
+  
+                {/* Right Section: Button Shimmer */}
+                <div className="mt-4 md:mt-0">
+                  <div className="h-10 w-20 bg-gray-700/50 rounded-lg"></div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-  
-        {/* Right Section: Buttons */}
-        <div className="flex space-x-4 mt-4 md:mt-0">
-          <div className="h-10 w-20 bg-gray-300 rounded"></div>
-  
-        </div>
       </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-        
-        {/* Left Section: Photo, Name, and Details */}
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-          <div>
-            <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-            <div className="h-4 w-24 bg-gray-200 rounded"></div>
-            <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-          </div>
-        </div>
-  
-        {/* Right Section: Buttons */}
-        <div className="flex space-x-4 mt-4 md:mt-0">
-          <div className="h-10 w-20 bg-gray-300 rounded"></div>
-  
-        </div>
-      </div>
-      <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-        
-        {/* Left Section: Photo, Name, and Details */}
-        <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-          <div>
-            <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-            <div className="h-4 w-24 bg-gray-200 rounded"></div>
-            <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-          </div>
-        </div>
-  
-        {/* Right Section: Buttons */}
-        <div className="flex space-x-4 mt-4 md:mt-0">
-          <div className="h-10 w-20 bg-gray-300 rounded"></div>
-  
-        </div>
-      </div>
-     </div>
     );
   }
 
   if (connections.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] bg-gradient-to-r from-blue-50 to-purple-50  p-6">
+      <div className="flex flex-col items-center justify-center min-h-[90vh]  bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500  p-6">
         <div className="text-center">
           {/* Icon */}
           <svg
@@ -141,58 +107,68 @@ const Connections = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 py-10">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 relative py-10 overflow-hidden">
+    {/* Background Blobs */}
+    <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+        style={{
+          clipPath:
+            "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+        }}
+      ></div >
+  
+    {/* Content */}
+    <div className="relative z-10">
+      <h1 className="text-4xl font-extrabold text-gray-800 text-center mb-8">
         Connections
       </h1>
       <div className="space-y-4 px-4 max-w-4xl mx-auto">
         {connections.map((connection) => {
-         if (!connection) {
-          return null; // or return an empty element in React
-        }
-        
-        const { _id, firstName, lastName, photoUrl, age, gender, about } = connection;
-          
+          if (!connection) return null;
+  
+          const { _id, firstName, lastName, photoUrl, age, gender, about } = connection;
+  
           return (
             <div
               key={_id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col md:flex-row items-center justify-between"
+              className="bg-gray-800/90 backdrop-blur-lg rounded-xl  transition-shadow duration-300 p-6 flex flex-col md:flex-row items-center justify-between border border-gray-700/50 shadow-sm hover:shadow-md transform hover:scale-[1.02]"
             >
               {/* Left Section: Photo, Name, and Details */}
               <div className="flex items-center space-x-4">
                 {/* Profile Image */}
                 <img
                   alt="profile"
-                  className="w-16 h-16 rounded-full object-cover border-2 border-purple-200"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-gray-700/50 shadow-sm"
                   src={photoUrl}
                 />
                 {/* Name and Details */}
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-800">
+                  <h2 className="text-xl font-semibold text-gray-100">
                     {firstName} {lastName}
                   </h2>
                   {(age || gender) && (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-300">
                       {age && `${age} years`} {gender && `• ${gender}`}
                     </p>
                   )}
                   {about && (
-                    <p className="text-gray-600 text-sm mt-1">{about}</p>
+                    <p className="text-gray-400 text-sm mt-1">{about}</p>
                   )}
                 </div>
               </div>
-
-              {/* Right Section: View Profile Button */}
+  
+              {/* Right Section: Chat Button */}
               <Link to={"/chat/" + _id}>
-              <button className="mt-4 md:mt-0 bg-[#111827] text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300">
-               Chat
-              </button>
+                <button className="mt-4 md:mt-0 bg-gradient-to-r from-sky-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-sky-600 hover:to-blue-700 transition-colors duration-300 shadow-sm hover:shadow-md">
+                  Chat
+                </button>
               </Link>
             </div>
           );
         })}
       </div>
     </div>
+  </div>
   );
 };
 

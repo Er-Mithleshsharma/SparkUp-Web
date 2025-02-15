@@ -38,76 +38,47 @@ const Requests = () => {
 
   if (!requests) {
     return (
-      <div className="py-10 bg-gradient-to-r from-blue-50 to-purple-50 ">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Connection Requests
-        </h1>
-        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-          {/* Left Section: Photo, Name, and Details */}
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-            <div>
-              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-              <div className="h-4 w-24 bg-gray-200 rounded"></div>
-              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-            </div>
-          </div>
+      <div className="min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 relative py-10 overflow-hidden">
+        {/* Background Blobs */}
+        <div
+          className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+          style={{
+            clipPath:
+              "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+          }}
+        ></div>
 
-          {/* Right Section: Buttons */}
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-          {/* Left Section: Photo, Name, and Details */}
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-            <div>
-              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-              <div className="h-4 w-24 bg-gray-200 rounded"></div>
-              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-            </div>
-          </div>
+        {/* Content */}
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+            Connection Requests
+          </h1>
+          <div className="space-y-4 px-4 max-w-4xl mx-auto">
+            {/* Shimmer Cards */}
+            {[1, 2, 3, 4].map((_, index) => (
+              <div
+                key={index}
+                className="bg-gray-800/90 backdrop-blur-lg rounded-xl p-6 flex flex-col md:flex-row items-center justify-between border border-gray-700/50 shadow-sm animate-pulse"
+              >
+                {/* Left Section: Photo, Name, and Details */}
+                <div className="flex items-center space-x-4">
+                  {/* Profile Image Shimmer */}
+                  <div className="w-16 h-16 rounded-full bg-gray-700/50 border-2 border-gray-700/50"></div>
+                  {/* Name and Details Shimmer */}
+                  <div className="space-y-2">
+                    <div className="h-5 w-32 bg-gray-700/50 rounded"></div>
+                    <div className="h-4 w-24 bg-gray-700/50 rounded"></div>
+                    <div className="h-3 w-40 bg-gray-700/50 rounded"></div>
+                  </div>
+                </div>
 
-          {/* Right Section: Buttons */}
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-          {/* Left Section: Photo, Name, and Details */}
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-            <div>
-              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-              <div className="h-4 w-24 bg-gray-200 rounded"></div>
-              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-            </div>
-          </div>
-
-          {/* Right Section: Buttons */}
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>
-          </div>
-        </div>
-        <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col md:flex-row items-center justify-between animate-pulse max-w-4xl mx-auto mt-8">
-          {/* Left Section: Photo, Name, and Details */}
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-gray-300"></div>
-            <div>
-              <div className="h-5 w-32 bg-gray-300 rounded mb-2"></div>
-              <div className="h-4 w-24 bg-gray-200 rounded"></div>
-              <div className="h-3 w-40 bg-gray-200 rounded mt-2"></div>
-            </div>
-          </div>
-
-          {/* Right Section: Buttons */}
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>{" "}
-            <div className="h-10 w-20 bg-gray-300 rounded"></div>
+                {/* Right Section: Buttons Shimmer */}
+                <div className="flex space-x-4 mt-4 md:mt-0">
+                  <div className="h-10 w-20 bg-gray-700/50 rounded-lg"></div>
+                  <div className="h-10 w-20 bg-gray-700/50 rounded-lg"></div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -116,7 +87,7 @@ const Requests = () => {
 
   if (requests.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] bg-gradient-to-r from-blue-50 to-purple-50 p-6">
+      <div className="flex flex-col items-center justify-center min-h-[90vh] bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 p-6">
         <div className="text-center">
           {/* Icon */}
           <svg
@@ -147,62 +118,74 @@ const Requests = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 py-10">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-        Connection Requests
-      </h1>
-      <div className="space-y-4 px-4 max-w-4xl mx-auto">
-        {requests.map((request) => {
-          const { _id, firstName, lastName, photoUrl, age, gender, about } =
-            request.fromUserId;
+    <div className="min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 relative py-10 overflow-hidden">
+      {/* Background Blobs */}
+      <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+        style={{
+          clipPath:
+            "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+        }}
+      ></div>
 
-          return (
-            <div
-              key={_id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col md:flex-row items-center justify-between"
-            >
-              {/* Left Section: Photo, Name, and Details */}
-              <div className="flex items-center space-x-4">
-                {/* Profile Image */}
-                <img
-                  alt="profile"
-                  className="w-16 h-16 rounded-full object-cover border-2 border-purple-200"
-                  src={photoUrl}
-                />
-                {/* Name and Details */}
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {firstName} {lastName}
-                  </h2>
-                  {(age || gender) && (
-                    <p className="text-sm text-gray-500">
-                      {age && `${age} years`} {gender && `• ${gender}`}
-                    </p>
-                  )}
-                  {about && (
-                    <p className="text-gray-600 text-sm mt-1">{about}</p>
-                  )}
+      {/* Content */}
+      <div className="relative z-10">
+        <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+          Connection Requests
+        </h1>
+        <div className="space-y-4 px-4 max-w-4xl mx-auto">
+          {requests.map((request) => {
+            const { _id, firstName, lastName, photoUrl, age, gender, about } =
+              request.fromUserId;
+
+            return (
+              <div
+                key={_id}
+                className="bg-gray-800/90 backdrop-blur-lg rounded-xl hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col md:flex-row items-center justify-between border border-gray-700/50 shadow-sm transform hover:scale-[1.02]"
+              >
+                {/* Left Section: Photo, Name, and Details */}
+                <div className="flex items-center space-x-4">
+                  {/* Profile Image */}
+                  <img
+                    alt="profile"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-gray-700/50 shadow-sm"
+                    src={photoUrl}
+                  />
+                  {/* Name and Details */}
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-100">
+                      {firstName} {lastName}
+                    </h2>
+                    {(age || gender) && (
+                      <p className="text-sm text-gray-300">
+                        {age && `${age} years`} {gender && `• ${gender}`}
+                      </p>
+                    )}
+                    {about && (
+                      <p className="text-gray-400 text-sm mt-1">{about}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right Section: Accept and Reject Buttons */}
+                <div className="flex space-x-4 mt-4 md:mt-0">
+                  <button
+                    className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300 shadow-sm hover:shadow-md"
+                    onClick={() => reviewRequest("rejected", request._id)}
+                  >
+                    Reject
+                  </button>
+                  <button
+                    className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors duration-300 shadow-sm hover:shadow-md"
+                    onClick={() => reviewRequest("accepted", request._id)}
+                  >
+                    Accept
+                  </button>
                 </div>
               </div>
-
-              {/* Right Section: Accept and Reject Buttons */}
-              <div className="flex space-x-4 mt-4 md:mt-0">
-                <button
-                  className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
-                  onClick={() => reviewRequest("rejected", request._id)}
-                >
-                  Reject
-                </button>
-                <button
-                  className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors duration-300"
-                  onClick={() => reviewRequest("accepted", request._id)}
-                >
-                  Accept
-                </button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

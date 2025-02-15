@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { emptyFeed } from "../utils/feedSlice";
@@ -14,7 +14,16 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [showNav, setShowNav] = useState(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    // Define the URLs where the navigation should be hidden
+    const hiddenNavPaths = ["/login"];
+
+    // Check if the current path is in the hiddenNavPaths array
+    setShowNav(!hiddenNavPaths.includes(location.pathname));
+  }, [location.pathname]);
   // Handle Logout
   const handleLogout = async () => {
     try {
@@ -40,8 +49,8 @@ const NavBar = () => {
     };
   }, []);
 
-  return (
-    <div className="bg-[#111827] shadow-md py-3 px-6 flex items-center justify-between text-white">
+  return showNav &&(
+    <div className="bg-black shadow-md py-3 px-6 flex items-center justify-between text-white">
       {/* Logo */}
       <Link
         to={user ? "/" : "/login"}

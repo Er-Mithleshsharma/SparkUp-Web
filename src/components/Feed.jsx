@@ -27,7 +27,14 @@ const Feed = () => {
 
   if (!feed) {
     return (
-      <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
+      <div className="flex justify-center items-center  bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 min-h-[90vh] relative">
+         <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+        style={{
+          clipPath:
+            "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+        }}
+      ></div>
       
       </div>
     )
@@ -36,7 +43,14 @@ const Feed = () => {
   if (feed.length <= 0)
   {
     return (
-      <div className="flex h-screen items-center justify-center bg-neutral text-white text-xl font-semibold">
+      <div className="flex justify-center items-center  bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 min-h-[90vh] relative font-bold text-3xl">
+      <div
+     className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+     style={{
+       clipPath:
+         "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+     }}
+   ></div>
         No new users found
       </div>
     );
@@ -45,7 +59,14 @@ const Feed = () => {
 
   return (
     feed && (
-      <div className="flex justify-center items-center  bg-neutral min-h-[90vh]">
+      <div className="flex justify-center items-center  bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 min-h-[90vh] relative">
+         <div
+        className="absolute top-0 left-0 w-full h-full bg-black opacity-20 mix-blend-overlay"
+        style={{
+          clipPath:
+            "polygon(0% 40%, 15% 50%, 30% 40%, 45% 50%, 60% 40%, 75% 50%, 90% 40%, 100% 50%, 100% 100%, 0% 100%)",
+        }}
+      ></div >
         <UserCard user={feed[0]} />
       </div>
     )

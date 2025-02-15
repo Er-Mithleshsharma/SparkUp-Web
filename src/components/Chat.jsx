@@ -99,11 +99,11 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 p-6">
       {/* Chat Container */}
       <div className="w-full max-w-4xl h-[85vh] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden">
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-5 flex items-center justify-between">
+        <div className="bg-black p-5 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white">CHATS</h1>
           <div className="flex items-center space-x-2">
             <span

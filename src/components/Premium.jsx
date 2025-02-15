@@ -58,7 +58,7 @@ const Premium = () => {
 
   if (isUserPremium) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-300">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg text-center">
         <h1 className="text-3xl font-bold text-gray-800">🎉 You are already a Premium Member!</h1>
         <p className="text-gray-600 mt-4 text-lg">
@@ -70,7 +70,7 @@ const Premium = () => {
   }
 
   return ( 
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 flex flex-col items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 flex flex-col items-center justify-center px-6 py-12">
       <h1 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">
         Upgrade to Premium
       </h1>

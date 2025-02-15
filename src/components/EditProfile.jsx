@@ -32,7 +32,7 @@ const EditProfile = ({ user }) => {
   };
 
   // Handle file change and create image preview
-  const handleFileChange =  async(event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setPhotoUrl(URL.createObjectURL(file)); // Set the photo URL for the preview
@@ -40,10 +40,12 @@ const EditProfile = ({ user }) => {
       data.append("file", file);
       data.append("upload_preset", "mithlesh_sharma");
       data.append("cloud_name", "dejxspajc");
-      const resImage = await axios.post("https://api.cloudinary.com/v1_1/dejxspajc/image/upload", data);
+      const resImage = await axios.post(
+        "https://api.cloudinary.com/v1_1/dejxspajc/image/upload",
+        data
+      );
       const photoUrl = resImage?.data?.url;
       setPhotoUrl(photoUrl);
-
     }
   };
 
@@ -53,13 +55,17 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-start bg-neutral p-6 gap-6 min-h-screen">
+    <div className="flex flex-col md:flex-row justify-center items-start bg-gradient-to-r from-sky-400 via-blue-300 to-orange-500 p-6 gap-6 min-h-screen">
       {/* Edit Profile Card */}
       <div className="w-full md:w-96 bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">Edit Profile</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">
+          Edit Profile
+        </h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              First Name
+            </label>
             <input
               type="text"
               value={firstName}
@@ -68,7 +74,9 @@ const EditProfile = ({ user }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Last Name
+            </label>
             <input
               type="text"
               value={lastName}
@@ -77,7 +85,9 @@ const EditProfile = ({ user }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Photo</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Photo
+            </label>
             {/* Upload Photo Button */}
             <button
               onClick={openFileInput}
@@ -96,10 +106,11 @@ const EditProfile = ({ user }) => {
             />
 
             {/* Display the preview of the selected image */}
-        
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Age
+            </label>
             <input
               type="text"
               value={age}
@@ -108,16 +119,25 @@ const EditProfile = ({ user }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-            <input
-              type="text"
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Gender
+            </label>
+            <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-            />
+            >
+              <option value="" disabled>
+                Select Gender
+              </option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">About</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              About
+            </label>
             <textarea
               value={about}
               onChange={(e) => setAbout(e.target.value)}
@@ -137,7 +157,9 @@ const EditProfile = ({ user }) => {
 
       {/* User Card Preview */}
       <div className="w-full md:w-96">
-        <UserCard user={{ firstName, lastName, photoUrl, age, gender, about }} />
+        <UserCard
+          user={{ firstName, lastName, photoUrl, age, gender, about }}
+        />
       </div>
 
       {/* Toast Notification */}
