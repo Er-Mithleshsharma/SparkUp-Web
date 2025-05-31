@@ -38,19 +38,23 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data.data));
-      navigate("/profile");
+      console.log("Profile Data:", res.data.data);
+  
+      navigate("/profile"); // Redirect after successful signup
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
     }
   };
+  
   const isLoggedIn = useSelector((store) => store.user);
-  console.log(isLoggedIn);
+  
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
+    if (isLoggedIn && location.pathname === "/login") {
+      navigate("/profile");
     }
-  }, [location.pathname,isLoggedIn]);
-
+  }, [isLoggedIn, location.pathname, navigate]);
+  
+  
   return (
     <div className="min-h-screen flex">
       {/* Left Side - Gradient Background with Sparkup Text (Hidden on Small Screens) */}

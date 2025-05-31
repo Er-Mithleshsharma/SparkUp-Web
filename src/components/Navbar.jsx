@@ -7,7 +7,10 @@ import { removeUser } from "../utils/userSlice";
 import { emptyFeed } from "../utils/feedSlice";
 import { FiUsers } from "react-icons/fi";
 import { IoMdLogOut } from "react-icons/io";
-import { MdKeyboardArrowDown } from "react-icons/md"; // Arrow icon for dropdown
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { RiRobot2Line } from "react-icons/ri"; // AI icon
+import AIChat from "./AIChat"; // Import the new AI chat component
+
 const NavBar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -16,6 +19,7 @@ const NavBar = () => {
   const dropdownRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
+  const [showChat, setShowChat] = useState(false); // State for chat visibility
 
   useEffect(() => {
     // Define the URLs where the navigation should be hidden
@@ -24,7 +28,7 @@ const NavBar = () => {
     // Check if the current path is in the hiddenNavPaths array
     setShowNav(!hiddenNavPaths.includes(location.pathname));
   }, [location.pathname]);
-  // Handle Logout
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
@@ -36,7 +40,6 @@ const NavBar = () => {
     }
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -49,86 +52,103 @@ const NavBar = () => {
     };
   }, []);
 
-  return showNav &&(
-    <div className="bg-black shadow-md py-3 px-6 flex items-center justify-between text-white">
-      {/* Logo */}
-      <Link
-        to={user ? "/" : "/login"}
-        className="text-2xl font-semibold text-blue-400 hover:text-blue-300 flex gap-1 items-center"
-      >
-        <img className="h-12" src="\logo_noBg.png" alt="" /> <p>SparkUp</p>
-      </Link>
-
-      {user && (
-        <div className="flex items-center space-x-6">
-          {/* Connections Icon */}
+  return (
+    <>
+      {showNav && (
+        <div className="bg-black shadow-md py-3 px-6 flex items-center justify-between text-white">
+          {/* Logo */}
           <Link
-            to="/connections"
-            className="flex items-center text-gray-300 hover:text-blue-300 transition"
+            to={user ? "/" : "/login"}
+            className="text-2xl font-semibold text-blue-400 hover:text-blue-300 flex gap-1 items-center"
           >
-            <FiUsers size={22} />
-            <span className="ml-2 hidden sm:inline">Connections</span>
+            <img className="h-12" src="\logo_noBg.png" alt="" /> <p>SparkUp</p>
           </Link>
 
-          {/* Profile Dropdown */}
-          <div className="relative z-[9999]" ref={dropdownRef}>
-            <button
-              className="flex items-center space-x-2 hover:bg-gray-800 px-3 py-2 rounded-lg transition"
-              onClick={() => setDropdownOpen(!isDropdownOpen)}
-            >
-              <img
-                src={user.photoUrl}
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full border border-gray-600 object-cover"
-              />
-              <span className="hidden sm:inline">{user.firstName}</span>
-              <MdKeyboardArrowDown size={20} />
-            </button>
+          {user && (
+            <div className="flex items-center space-x-6">
+              {/* AI Chat Button */}
+              <button
+                onClick={() => setShowChat(true)}
+                className="flex items-center text-gray-300 hover:text-blue-300 transition"
+                title="AI Assistant"
+              >
+                <RiRobot2Line size={22} />
+                <span className="ml-2 hidden sm:inline">AI Assistant</span>
+              </button>
 
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-3 w-48 bg-[#1f2937] shadow-lg rounded-md py-2">
-                <ul className="text-sm text-gray-300">
-                  <li>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 hover:bg-gray-700 rounded-t-md"
-                    >
-                      Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/requests"
-                      className="block px-4 py-2 hover:bg-gray-700"
-                    >
-                      Requests
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/premium"
-                      className="block px-4 py-2 hover:bg-gray-700"
-                    >
-                      Premium
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center w-full px-4 py-2 hover:bg-red-600 text-red-400 hover:text-white transition rounded-b-md"
-                    >
-                      <IoMdLogOut size={18} className="mr-2" />
-                      Logout
-                    </button>
-                  </li>
-                </ul>
+              {/* Connections Icon */}
+              <Link
+                to="/connections"
+                className="flex items-center text-gray-300 hover:text-blue-300 transition"
+              >
+                <FiUsers size={22} />
+                <span className="ml-2 hidden sm:inline">Connections</span>
+              </Link>
+
+              {/* Profile Dropdown */}
+              <div className="relative z-[9999]" ref={dropdownRef}>
+                <button
+                  className="flex items-center space-x-2 hover:bg-gray-800 px-3 py-2 rounded-lg transition"
+                  onClick={() => setDropdownOpen(!isDropdownOpen)}
+                >
+                  <img
+                    src={user.photoUrl}
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full border border-gray-600 object-cover"
+                  />
+                  <span className="hidden sm:inline">{user.firstName}</span>
+                  <MdKeyboardArrowDown size={20} />
+                </button>
+
+                {/* Dropdown Menu */}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-48 bg-[#1f2937] shadow-lg rounded-md py-2">
+                    <ul className="text-sm text-gray-300">
+                      <li>
+                        <Link
+                          to="/profile"
+                          className="block px-4 py-2 hover:bg-gray-700 rounded-t-md"
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/requests"
+                          className="block px-4 py-2 hover:bg-gray-700"
+                        >
+                          Requests
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/premium"
+                          className="block px-4 py-2 hover:bg-gray-700"
+                        >
+                          Premium
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center w-full px-4 py-2 hover:bg-red-600 text-red-400 hover:text-white transition rounded-b-md"
+                        >
+                          <IoMdLogOut size={18} className="mr-2" />
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
-    </div>
+      
+      {/* AI Chat Component */}
+      {showChat && <AIChat onClose={() => setShowChat(false)} />}
+    </>
   );
 };
 

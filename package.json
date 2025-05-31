@@ -12,6 +12,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
+    "@google/generative-ai": "^0.24.1",
     "@reduxjs/toolkit": "^2.5.1",
     "axios": "^1.7.9",
     "emoji-picker-react": "^4.12.0",
