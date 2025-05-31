@@ -38,7 +38,6 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data.data));
-      console.log("Profile Data:", res.data.data);
   
       navigate("/profile"); // Redirect after successful signup
     } catch (err) {

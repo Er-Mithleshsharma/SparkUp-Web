@@ -4,8 +4,8 @@ const UserCard = ({ user }) => {
   const { firstName, lastName, photoUrl, age, gender, about } = user;
 
   return (
-    <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-full max-w-[280px] md:max-w-[320px] lg:max-w-[300px] xl:max-w-[340px] transform transition-all">
-      <figure className="relative h-[500px] w-full">
+    <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-full max-w-[320px] md:max-w-[320px] lg:max-w-[300px] xl:max-w-[340px] transform transition-all">
+      <figure className="relative h-[450px] sm:h-[500px] w-full">
         <img
           src={photoUrl || "https://via.placeholder.com/400"}
           alt={`${firstName} ${lastName}`}

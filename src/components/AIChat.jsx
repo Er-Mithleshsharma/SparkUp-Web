@@ -1,4 +1,3 @@
-// src/components/AIChat.js
 import { useState, useRef, useEffect } from "react";
 import { FiSend } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
@@ -14,6 +13,16 @@ const AIChat = ({ onClose }) => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -57,6 +66,137 @@ const AIChat = ({ onClose }) => {
     }
   };
 
+  // Mobile view - full screen chat
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 bg-gray-900 bg-opacity-90 z-[9999] flex flex-col">
+        <div className="bg-gray-800 text-white p-3 flex justify-between items-center">
+          <div className="flex items-center">
+            <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
+              <span className="text-black font-bold">S</span>
+            </div>
+            <h3 className="font-semibold">Sparky - Your Buddy</h3>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
+            <IoClose size={24} />
+          </button>
+        </div>
+        
+        <div className="flex-1 p-4 overflow-y-auto">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`mb-3 p-3 rounded-lg ${
+                message.sender === "user"
+                  ? "bg-blue-600 text-white ml-auto max-w-[80%]"
+                  : "bg-gray-700 text-gray-200 mr-auto max-w-[80%]"
+              }`}
+            >
+              {message.text}
+            </div>
+          ))}
+          
+          {isLoading && (
+            <div className="mb-3 p-3 rounded-lg bg-gray-700 text-gray-200 mr-auto max-w-[80%]">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-100"></div>
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-200"></div>
+              </div>
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
+        
+        <form onSubmit={handleSubmit} className="p-3 bg-gray-800">
+          <div className="flex">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your message, friend..."
+              className="flex-1 bg-gray-700 text-white rounded-l-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg py-3 px-4 disabled:opacity-50"
+            >
+              <FiSend size={20} />
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  // Tablet view (768px - 1023px)
+  if (window.innerWidth < 1024) {
+    return (
+      <div className="fixed bottom-4 right-4 w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700 flex flex-col z-[9999]">
+        <div className="bg-gray-900 text-white p-3 rounded-t-lg flex justify-between items-center">
+          <div className="flex items-center">
+            <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
+              <span className="text-black font-bold">S</span>
+            </div>
+            <h3 className="font-semibold">Sparky - Your Buddy</h3>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
+            <IoClose size={20} />
+          </button>
+        </div>
+        
+        <div className="flex-1 p-4 overflow-y-auto max-h-80">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`mb-3 p-3 rounded-lg ${
+                message.sender === "user"
+                  ? "bg-blue-600 text-white ml-auto max-w-[90%]"
+                  : "bg-gray-700 text-gray-200 mr-auto max-w-[90%]"
+              }`}
+            >
+              {message.text}
+            </div>
+          ))}
+          
+          {isLoading && (
+            <div className="mb-3 p-3 rounded-lg bg-gray-700 text-gray-200 mr-auto max-w-[90%]">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></div>
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-100"></div>
+                <div className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-200"></div>
+              </div>
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
+        
+        <form onSubmit={handleSubmit} className="p-3 border-t border-gray-700">
+          <div className="flex">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 bg-gray-700 text-white rounded-l-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg py-2 px-4 disabled:opacity-50"
+            >
+              <FiSend size={18} />
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  // Desktop view (1024px and above)
   return (
     <div className="fixed bottom-4 right-4 w-96 bg-gray-800 rounded-lg shadow-xl border border-gray-700 flex flex-col z-[9999]">
       <div className="bg-gray-900 text-white p-3 rounded-t-lg flex justify-between items-center">
